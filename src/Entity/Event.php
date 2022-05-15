@@ -35,13 +35,19 @@ class Event {
     private ?int $id = null;
     
     /** 
-     * Creation timestamp 
+     * Time created
      * 
-     * @ORM\Column(type="datetime")
-     * 
+     * @ORM\Column(name="time_created", type="datetime")
     */
     #[Assert\NotNull]
-    public ?\DateTimeInterface $time_created=null;
+    public ?\DateTimeInterface $timeCreated = null;
+
+    /**
+     * Time recorded
+     * 
+     * @ORM\Column(name="time_recorded", type="datetime")
+    */
+    private ?\DateTimeInterface $timeRecorded = null;
 
     /** 
      * Type: enum("info", "warning", "error") 
@@ -65,6 +71,15 @@ class Event {
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTimeRecorded(): \DateTime
+    {
+        return $this->timeRecorded;
+    }    
+
+    public function __construct() {
+        $this -> timeRecorded = new \DateTime();
     }
 }
 
